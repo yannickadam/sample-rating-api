@@ -1,0 +1,34 @@
+{
+  "name": "sample-rating-api",
+  "version": "1.0.0",
+  "description": "A simple rating API backend &amp; swagger specs for smartclients tutorials",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./node_modules/nodemon/bin/nodemon.js -x \"node ./node_modules/ts-node/dist/bin.js\" ./src/index.ts | node node_modules/bunyan/bin/bunyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yannickadam/sample-rating-api.git"
+  },
+  "author": "",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/yannickadam/sample-rating-api/issues"
+  },
+  "homepage": "https://github.com/yannickadam/sample-rating-api#readme",
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "typescript": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/bunyan": "^1.8.4",
+    "@types/koa": "^2.0.46",
+    "@types/koa-bodyparser": "^5.0.1",
+    "@types/koa-router": "^7.0.31",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1"
+  }
+}
