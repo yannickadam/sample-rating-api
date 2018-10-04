@@ -40,6 +40,12 @@ export const addRating = (ctx: Koa.Context, next: any) => {
   };
 }
 
+export const getRatings = (ctx: Koa.Context, next: any) => {
+  logger.info(`getRatings called.`);
+  ctx.status = 201;
+  ctx.body = Object.keys(FlightsRatingMap).map((key) => ({...FlightsRatingMap[key], flightId: key}) );
+}
+
 export const getRating = (ctx: Koa.Context, next: any) => {
   const flightId: string = ctx.params.flightId;
 
