@@ -18,7 +18,7 @@ export const addRating = (ctx: Koa.Context, next: any) => {
   const flightId: string = ctx.params.flightId;
   const rating: number = parseInt((ctx.request.body as any).rating, 10);
 
-  if (!rating) {
+  if (!rating || rating < 1 || rating > 5) {
     ctx.status = 400;
     ctx.body = {error: "Invalid rating"};
     return;
