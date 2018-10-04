@@ -16,6 +16,10 @@ tags:
 schemes:
 - "https"
 - "http"
+consumes:
+- application/json
+produces:
+- application/json
 paths:
   /rating/{flightId}:
     get:
@@ -24,8 +28,6 @@ paths:
       summary: "Returns the rating for this flight"
       description: "Returns the rating for this flight"
       operationId: "getRatingForFlight"
-      produces:
-      - "application/json"
       parameters:
       - name: "flightId"
         in: "path"
@@ -47,37 +49,45 @@ paths:
       summary: "Adds a rating to a flight"
       description: ""
       operationId: "addRatingToFlight"
-      consumes:
-      - "application/x-www-form-urlencoded"
-      produces:
-      - "application/json"
       parameters:
       - name: "flightId"
         in: "path"
         description: "ID of the flights we want to rate"
         required: true
         type: "string"
-      - name: "rating"
-        in: "formData"
-        description: "A value between 1 and 5 stars."
+      - name: "ratingBody"
+        in: "body"
+        description: "The rating to give to the flight."
         required: true
-        type: "number"
+        schema:
+          type: object
+          required:
+          - rating
+          properties:
+            rating:
+              type: number
+              description: "A value between 1 and 5 stars."
       responses:
-        200:
+        201:
           description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Rating"
         400:
           description: "Invalid input"
 
 definitions:
   Rating:
-    type: "object"
-    required: 
-    - "flightId"
-    - "rating"
+    type: object
+    required:
+    - flightId
+    - rating
     properties:
       flightId:
-        type: "string"
+        type: string
         description: "A flight ID is composed of [AN2/Airline Code][N1-4 / Flight number] (ie: LH2148)"
       rating:
-        type: "number"
+        type: number
         description: "A rating has a value between 1 and 5. (ie: 4.38)"
+      votes:
+        type: number
+        description: The number of votes

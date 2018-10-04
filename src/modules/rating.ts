@@ -9,6 +9,7 @@ export interface RatingStorage {
 export interface RatingModel {
   flightId: string;
   rating: number;
+  votes: number;
 }
 
 const FlightsRatingMap: {[key: string]: RatingStorage } = {};
@@ -16,6 +17,12 @@ const FlightsRatingMap: {[key: string]: RatingStorage } = {};
 export const addRating = (ctx: Koa.Context, next: any) => {
   const flightId: string = ctx.params.flightId;
   const rating: number = parseInt((ctx.request.body as any).rating, 10);
+
+  if (!rating) {
+    ctx.status = 400;
+    ctx.body = {error: "Invalid rating"};
+    return;
+  }
 
   logger.info(`addRating called for flight ${flightId}`);  
   if( !FlightsRatingMap[flightId] ) {
@@ -26,8 +33,11 @@ export const addRating = (ctx: Koa.Context, next: any) => {
     FlightsRatingMap[flightId].votes++;
     logger.info(FlightsRatingMap[flightId]);
   }
-  
-  ctx.body = "Sucessfully added rating.";
+  ctx.status = 201;
+  ctx.body = {
+      ...FlightsRatingMap[flightId],
+      flightId
+  };
 }
 
 export const getRating = (ctx: Koa.Context, next: any) => {
@@ -37,8 +47,8 @@ export const getRating = (ctx: Koa.Context, next: any) => {
 
   if( FlightsRatingMap[flightId] ) {
     const ratingModel: RatingModel = {
-      flightId: flightId,
-      rating: FlightsRatingMap[flightId].rating
+        ...FlightsRatingMap[flightId],
+        flightId
     };
     ctx.body = ratingModel;
   } else {
