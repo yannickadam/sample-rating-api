@@ -18,17 +18,17 @@
   "homepage": "https://github.com/yannickadam/sample-rating-api#readme",
   "dependencies": {
     "bunyan": "^1.8.12",
-    "koa": "^2.5.3",
+    "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.2.2"
   },
   "devDependencies": {
-    "@types/bunyan": "^1.8.4",
-    "@types/koa": "^2.0.46",
-    "@types/koa-bodyparser": "^5.0.1",
-    "@types/koa-router": "^7.0.31",
-    "nodemon": "^1.18.4",
+    "@types/bunyan": "^1.8.5",
+    "@types/koa": "^2.0.48",
+    "@types/koa-bodyparser": "^4.2.1",
+    "@types/koa-router": "^7.0.37",
+    "nodemon": "^1.18.9",
     "ts-node": "^7.0.1"
   }
 }
